@@ -1,0 +1,31 @@
+{
+  // Default to all rules enabled, then relax the ones that fight technical docs
+  "default": true,
+
+  // Allow longer lines — methodology docs have tables and long URLs
+  "MD013": false,
+
+  // Allow inline HTML — we use <br> and <details> occasionally
+  "MD033": false,
+
+  // Don't require blank lines around fences — sometimes they're inside lists
+  "MD031": {
+    "list_items": false
+  },
+
+  // First line doesn't have to be a top-level heading (e.g., CITATION.cff isn't markdown)
+  "MD041": false,
+
+  // Allow duplicate headings if they're under different parents (common in checklists)
+  "MD024": {
+    "siblings_only": true
+  },
+
+  // Permit emphasis used as headings sparingly (rarely true here, but allowed)
+  "MD036": false,
+
+  // No trailing punctuation in headings, but allow ? and !
+  "MD026": {
+    "punctuation": ".,;:"
+  }
+}

@@ -1,0 +1,18 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# CI caches
+.lycheecache
+node_modules/
+
+# Build artifacts (none expected for a docs repo, but defensive)
+dist/
+build/
+.cache/

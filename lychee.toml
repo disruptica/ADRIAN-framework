@@ -1,0 +1,50 @@
+############################# Display #########################################
+
+# Verbose output
+verbose = "info"
+
+# Show progress (set to true locally; false in CI for cleaner logs)
+no_progress = true
+
+############################# Cache ############################################
+
+# Cache successful responses for a week to speed up scheduled runs
+cache = true
+max_cache_age = "7d"
+
+############################# Runtime ##########################################
+
+# Wait this many seconds between retries for the same host
+retry_wait_time = 2
+
+# Max number of retries per URL
+max_retries = 3
+
+# Request timeout in seconds
+timeout = 20
+
+# Max concurrent requests — keep modest to avoid being rate-limited
+max_concurrency = 8
+
+############################# Requests #########################################
+
+# Treat these status codes as success (in addition to 2xx)
+# 429 = rate-limited but exists; 403 = some sites block bots but link is valid
+accept = [200, 206, 429]
+
+# Exclude email addresses from link checking
+exclude_mail = true
+
+# Exclude private and local addresses
+exclude_private = true
+
+# Don't check anchors (fragment identifiers) — too noisy across renderers
+include_fragments = false
+
+# Skip these URL patterns
+exclude = [
+  # Placeholder in CITATION/README until repo is created
+  "https://github.com/disruptica/adrian-framework",
+  # Local file refs to be added later
+  "^file://"
+]
