@@ -5,12 +5,15 @@ abstract: >
   An open source software development framework born at Disruptica for small,
   self-managing teams where AI agents produce most of the code and humans own
   intent, judgment, and accountability. Built around a four-phase loop (Align,
-  Implement, Deliver, Adapt) and an in-app requirements bot (BugLady) as the
-  requirements spine. The unit of work is the Request, born from a BugLady chat interview. Flexes across unregulated and regulated domains via a compliance
-  mode overlay.
+  Implement, Deliver, Adapt) and the Request Contract, a locked specification
+  that every downstream artifact derives from. The unit of work is the Request,
+  traceable to the intake that triggered it and sized to hours or days.
+  Tool-independent: the framework specifies what a requirements system must do
+  rather than which one to use. Flexes across unregulated and regulated domains
+  via a compliance mode overlay.
 type: software
-version: "0.1.0"
-date-released: 2026-08-11
+version: "0.2.0"
+date-released: 2026-10-11
 license: MIT
 repository-code: "https://github.com/disruptica/adrian-framework"
 url: "https://github.com/disruptica/adrian-framework"
@@ -28,11 +31,11 @@ keywords:
   - quality-engineering
   - software-engineering
   - adrian
-  - buglady
+  - tool-agnostic
 identifiers:
   - type: url
     value: "https://buglady.ai"
-    description: "Companion tool — BugLady (in-app requirements bot; Disruptica's internal deployment is codenamed Ramjet)"
+    description: "Reference implementation — BugLady (in-app requirements agent; Disruptica's internal deployment is codenamed Ramjet)"
   - type: url
     value: "https://disruptica.com"
     description: "Origin organization — Disruptica"

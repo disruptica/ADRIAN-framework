@@ -8,7 +8,7 @@ Print these. Use them. They're terse on purpose.
 
 ## Gate 1 → Request Approval (Align → Implement)
 
-**Owner:** PM. Approves in BugLady.
+**Owner:** PM. Approves in the requirements system.
 
 **Cannot proceed if any answer is "no":**
 
@@ -25,7 +25,7 @@ Print these. Use them. They're terse on purpose.
 - [ ] Dev consulted on architectural items in Decisions
 - [ ] QA consulted on adversarial gaps in Acceptance
 
-**On gate pass:** The Request Contract is locked in BugLady (it never goes to git — the interview may contain customer PII). The Request enters the priority queue. Mid-flight change means kill-and-respawn, never mutation.
+**On gate pass:** The Request Contract is locked in the requirements system, with the approver and timestamp recorded. The Request enters the priority queue. Mid-flight change means kill-and-respawn, never mutation. (Where the contract lives is your choice; customer PII never enters the repository — see [`TOOLING.md`](./TOOLING.md).)
 
 ---
 
@@ -61,7 +61,7 @@ Print these. Use them. They're terse on purpose.
 - [ ] Manual UX state walkthrough completed on real devices
 - [ ] Verification production signals checked and moved in expected direction (or confirmed unchanged where that was the goal)
 - [ ] No SLO burn from this deploy
-- [ ] Customer loop closed: original BugLady-chat customer confirmed the flow works for their case
+- [ ] Customer loop closed: the customer named in the contract's Origin confirmed the flow works for their case
 - [ ] If compliance flag was PCI/HIPAA/gov: named human approver signed the prod promotion
 - [ ] If compliance flag was SOC2: change attribution recorded for audit log
 
@@ -88,8 +88,8 @@ Some gate items are conditional on the compliance flag. The full mapping is in [
 The request does not "fail." It moves back to the prior phase with a documented reason.
 
 **Gate 1 failure (Request Approval):**
-- Send the contract back to BugLady with the PM's notes (or re-interview)
-- If BugLady keeps failing in the same way, that's a Phase 4 input — adjust BugLady's prompt or the Request Contract template
+- Send the contract back for redraft with the PM's notes (or re-interview)
+- If drafts keep failing in the same way, that's a Phase 4 input — adjust the intake prompt or the Request Contract template
 
 **Gate 2 failure (PR Ready):**
 - Most failures here are missing tests or symbol-footprint gaps — these are quick fixes

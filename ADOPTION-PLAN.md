@@ -12,7 +12,7 @@ How to roll out ADRIAN on an existing team without breaking what's already worki
 
 You will not get this clean. Real adoption is messy. Use this as a target, not a contract. Expect:
 
-- Week 3 will reveal that BugLady's output is worse than you thought
+- Week 3 will reveal that your drafted contracts are worse than you thought
 - Week 5 will reveal that one Dev hates writing `CLAUDE.md` and you'll need to fix incentives
 - Week 6 will reveal a quality issue the dashboard caught that you'd have shipped a month ago
 - Week 8 will not be "we're done." It will be "we're in steady state and now we iterate."
@@ -23,11 +23,12 @@ The plan is a structure for those discoveries, not a schedule that has to be hit
 
 ## Week 0 — Decide and prep
 
-Before week 1, the team lead does three things alone:
+Before week 1, the team lead does four things alone:
 
 1. **Pick one team** to be the pilot. Not the most overloaded. Not the most strategic. Pick the team that ships consistently and has a healthy retrospective culture.
 2. **Pick one app** as the pilot codebase. Ideally not the most critical, not the least critical — mid-stakes is best for learning.
 3. **Confirm the compliance flag** for that app. If it's regulated, the rollout has more steps (named reviewers, audit trails). If it's unregulated, you can move faster.
+4. **Check your requirements system against the six requirements** in [`TOOLING.md`](./TOOLING.md). You probably already own something that qualifies — an issue tracker with a contract template usually does. What you're looking for is the gaps: can it record an approval, can it keep a contract from changing silently afterwards, can it hand a coding agent plain text. Fix those with a template and a convention before week 2, not with a purchase.
 
 Tell the team in week 0 that ADRIAN is coming, share the README, and get questions. Don't try to sell it as "the answer." Sell it as "version 0.1 of an open source framework born at Disruptica that we evolve together."
 
@@ -40,6 +41,7 @@ Tell the team in week 0 that ADRIAN is coming, share the README, and get questio
 ### What to do
 
 - Commit `CLAUDE.md` to the pilot repo, drafted from the relevant template
+- Add the Request Contract template to wherever requests get written — an issue template, a spec file, or your requirements agent's prompt
 - Set up AI-attribution tagging on PRs (a label is fine; automated detection is better)
 - Add mutation testing to CI on the critical paths only (don't try to cover everything yet)
 - Set up the architectural fitness function for import boundaries
@@ -66,7 +68,7 @@ Tell the team in week 0 that ADRIAN is coming, share the README, and get questio
 ### What to do
 
 - Start every new request with the six-section Request Contract
-- BugLady drafts; PM pressure-tests using the four checks
+- Your requirements agent drafts and the PM pressure-tests using the four checks. No agent? The PM drafts and Dev or QA pressure-tests instead — never let the author be the only reviewer
 - Apply Gate 1 checklist (Request Approval) before any new Request enters implementation
 - Existing in-flight work continues unchanged
 
@@ -78,14 +80,14 @@ Tell the team in week 0 that ADRIAN is coming, share the README, and get questio
 ### What success looks like at end of week 2
 
 - At least 3 requests have a complete Request Contract
-- PM has rejected at least one contract back to BugLady (if not, the bar is too low)
+- PM has rejected at least one contract for redraft (if not, the bar is too low)
 - Team agrees: "this contract is clearer than what we used to start with"
 
 ### Common week 2 failures
 
-- BugLady produces specs missing 2–3 sections. Update BugLady's prompt; don't backfill manually.
+- Drafts arrive missing 2–3 sections. Fix the intake prompt or the template; don't backfill manually.
 - PM rubber-stamps specs to keep velocity. Watch for this in the retros — if no specs were rejected, the PM either has perfect input or isn't pressure-testing.
-- Devs say "this is more process." Show them the defect-respawn data after two weeks — contracts born from BugLady interviews fail far less often than the vague tickets they replace.
+- Devs say "this is more process." Show them the defect-respawn data after two weeks — contracts born from a real interview fail far less often than the vague tickets they replace.
 
 ---
 
@@ -226,7 +228,7 @@ Tell the team in week 0 that ADRIAN is coming, share the README, and get questio
 
 ### What "done" means
 
-It doesn't. ADRIAN v0.1 is the starting point. The team owns the methodology now. Quarterly:
+It doesn't. ADRIAN v0.2 is the starting point. The team owns the methodology now. Quarterly:
 
 - Review the methodology itself in the Monthly Tech Radar
 - Promote local adaptations to the canonical doc
@@ -262,7 +264,7 @@ The team runs Quality Reviews without changing anything. Updates the dashboard w
 This is worse than skipping the methodology — it produces evidence of process for audits without producing actual quality. Detect via the "what changed this week?" question. If the answer is nothing, the rituals are theater.
 
 ### Tooling over process
-Someone proposes a new tool to "solve" a methodology problem. Maybe the defect respawn rate is high — instead of fixing BugLady's interview prompt, they propose a new requirements tool.
+Someone proposes a new tool to "solve" a methodology problem. Maybe the defect respawn rate is high — instead of fixing the intake prompt, they propose a new requirements tool.
 
 Tools are usually the wrong answer in ADRIAN. The methodology problems are upstream of tools. Default to fixing the process; only reach for tooling when the same problem persists after two process iterations.
 
@@ -304,4 +306,4 @@ If ADRIAN doesn't work for your team after 8 weeks of honest adoption:
 
 The most likely partial-success scenario is: request contract works, gates work, dashboard works, but Phase 4 rituals don't stick. That's fine. Run ADRIAN without the rituals and add them back later.
 
-The least likely partial-success scenario is: the methodology works but BugLady doesn't produce good enough specs. In that case, the PM does more drafting and BugLady becomes assistive rather than primary. ADRIAN still works; the human cost is higher.
+The least likely partial-success scenario is: the methodology works but your requirements agent doesn't produce good enough contracts. In that case the PM does more drafting and the agent becomes assistive rather than primary. ADRIAN still works; the human cost is higher.

@@ -105,11 +105,11 @@ Three templates follow, one per language archetype. Copy, fill in, commit.
 - Always add JSDoc to exported functions in public modules
 
 ## Request-driven workflow
-- Every task implements a Request Contract from BugLady, provided in your context (the PR links to it)
-- Read the contract — including the attached user interview — before generating code
+- Every task implements a Request Contract, provided in your context (the PR links to it)
+- Read the contract — including the attached origin (the user interview or whatever triggered the request) — before generating code
 - Acceptance Criteria in the contract become test cases — generate them first, then implement
 - Do not exceed scope: respect Boundaries (when present) and the Summary's intent
-- If the contract is ambiguous, check the interview first; if still ambiguous, ask one clarifying question rather than guessing
+- If the contract is ambiguous, check the origin first; if still ambiguous, ask one clarifying question rather than guessing
 - Never mutate the contract — if it's wrong, the Request gets killed and respawned by the PM
 
 ## Compliance mode
@@ -216,11 +216,11 @@ Three templates follow, one per language archetype. Copy, fill in, commit.
 - Always add docstrings to public functions and classes
 
 ## Request-driven workflow
-- Every task implements a Request Contract from BugLady, provided in your context (the PR links to it)
-- Read the contract — including the attached user interview — before generating code
+- Every task implements a Request Contract, provided in your context (the PR links to it)
+- Read the contract — including the attached origin (the user interview or whatever triggered the request) — before generating code
 - Acceptance Criteria in the contract become test cases — generate them first, then implement
 - Do not exceed scope: respect Boundaries (when present) and the Summary's intent
-- If the contract is ambiguous, check the interview first; if still ambiguous, ask one clarifying question rather than guessing
+- If the contract is ambiguous, check the origin first; if still ambiguous, ask one clarifying question rather than guessing
 - Never mutate the contract — if it's wrong, the Request gets killed and respawned by the PM
 
 ## Compliance mode
@@ -335,11 +335,11 @@ Three templates follow, one per language archetype. Copy, fill in, commit.
 - Always pass context as the first parameter on blocking calls
 
 ## Request-driven workflow
-- Every task implements a Request Contract from BugLady, provided in your context (the PR links to it)
-- Read the contract — including the attached user interview — before generating code
+- Every task implements a Request Contract, provided in your context (the PR links to it)
+- Read the contract — including the attached origin (the user interview or whatever triggered the request) — before generating code
 - Acceptance Criteria in the contract become test cases — generate them first, then implement
 - Do not exceed scope: respect Boundaries (when present) and the Summary's intent
-- If the contract is ambiguous, check the interview first; if still ambiguous, ask one clarifying question rather than guessing
+- If the contract is ambiguous, check the origin first; if still ambiguous, ask one clarifying question rather than guessing
 - Never mutate the contract — if it's wrong, the Request gets killed and respawned by the PM
 
 ## Compliance mode
@@ -367,16 +367,16 @@ These apply regardless of language. Add this to every `CLAUDE.md`:
 
 When you take on a task:
 
-1. **Read the Request Contract first.** It comes from BugLady and is provided in your context (the PR links to it). Read the attached interview too. If there's no contract, STOP and ask.
+1. **Read the Request Contract first.** It is provided in your context (the PR links to it). Read the attached origin too. If there's no contract, STOP and ask.
 2. **Read this `CLAUDE.md` and any nested ones** in the directory you're working in.
 3. **Search for related code** before generating new code — if it exists, reuse or refactor; do not duplicate.
 4. **Generate tests first** from the Acceptance Criteria in the contract.
 5. **Implement** the minimum that satisfies the tests and the contract.
 6. **Run the test suite** before declaring complete.
 7. **Search for callsites** of every symbol you modified. If a callsite was not opened, the task is not done.
-8. **Summarize the diff** in the PR description, including: what changed, why, what tests cover it, and the BugLady link to the Request Contract. If the contract proved wrong, say so — the PM decides kill-and-respawn; you never mutate the contract.
+8. **Summarize the diff** in the PR description, including: what changed, why, what tests cover it, and the link to the Request Contract. If the contract proved wrong, say so — the PM decides kill-and-respawn; you never mutate the contract.
 
-If at any step you find contract ambiguity, check the interview first; if still ambiguous, ask one clarifying question rather than guessing. Guesses produce slop.
+If at any step you find contract ambiguity, check the origin first; if still ambiguous, ask one clarifying question rather than guessing. Guesses produce slop.
 ```
 
 ---

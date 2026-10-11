@@ -44,10 +44,10 @@ If the flag is wrong, every downstream gate is wrong. Get it right.
 
 **Phase 1 (Contract):**
 - Contract must list any data classifications we are committed to handle
-- Contract author and approver are recorded in BugLady (approval metadata)
+- Contract author and approver are recorded in the requirements system (approval metadata)
 
 **Phase 2 (PR):**
-- PR must link the Request Contract it implements (BugLady link)
+- PR must link the Request Contract it implements (stable link into the requirements system)
 - PR author and approver recorded (the PR review acts as authorization)
 - AI-attribution tag set (auditors increasingly want to know what was AI-generated)
 

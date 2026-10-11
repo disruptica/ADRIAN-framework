@@ -11,10 +11,17 @@ This is the canonical reference. All other documents in the set support or templ
 ADRIAN is built on three premises. If any of them is wrong in your context, ADRIAN is wrong for you.
 
 1. **AI produces 85%+ of the code.** Humans steer, review key dimensions, and refactor — they do not type most of the code.
-2. **A requirements bot (BugLady) drafts specs from in-app conversations.** Humans approve and pressure-test those specs.
+2. **Requests arrive as drafted specs, not vague tickets.** A requirements agent drafts them from conversations or other intake; humans approve and pressure-test. Without an agent, the PM drafts.
 3. **The team is self-managing.** Supervision is metrics and gates, not approval chains.
 
-If you're at 60% AI generation, ADRIAN is overkill. If you don't have a requirements bot, the methodology still works but the PM does more drafting in Phase 1. If you have approval chains, the gate structure here will fight your org.
+If you're at 60% AI generation, ADRIAN is overkill. If you don't have a requirements agent, the methodology still works but the PM does more drafting in Phase 1. If you have approval chains, the gate structure here will fight your org.
+
+### Two terms, used throughout
+
+- **Requirements agent** — the AI that conducts intake and drafts the Request Contract. Optional.
+- **Requirements system** — where the approved contract lives, locks, and is addressed from. Required.
+
+They're often the same product; they don't have to be. What ADRIAN requires of either is specified in [`TOOLING.md`](./TOOLING.md), which also maps the common tool setups onto this methodology. ADRIAN is tool-independent by design — no document in this set assumes a particular product.
 
 ---
 
@@ -24,7 +31,7 @@ The unit of work is a **Request**, not a story or a ticket.
 
 A Request is:
 
-- Something a user or the business actually asked for — born from a BugLady interview
+- Something a user or the business actually asked for — traceable to the intake that triggered it
 - Small enough to deliver in **hours to days**, never weeks
 - Specified completely (Request Contract) before implementation begins
 - Prioritized by **User Impact × Business Context** — priority drives the queue, and the queue drives strategy
@@ -38,7 +45,7 @@ If a change can't be sized to days, it isn't one Request — split it before app
 Software development used to be chess: plan far ahead, commit, execute over months. AI-first development is squash: the ball (user need) moves daily, and winning is reacting with quality at speed. ADRIAN's mechanics exist to make reacting cheap:
 
 - **Reprioritizing the queue is free** — nothing in-flight mutates, so reshuffling what's next costs nothing
-- **Killing an in-flight Request is cheap** — the unit is small, the contract and interview survive into the respawn
+- **Killing an in-flight Request is cheap** — the unit is small, and the contract and its origin survive into the respawn
 - **ADRIAN rewards change.** A killed-for-priority Request is the system working, not failing. What gets watched is killed-for-contract-defect — that's a Phase 1 quality signal (see the Respawn Rate metric)
 
 ---
@@ -47,15 +54,17 @@ Software development used to be chess: plan far ahead, commit, execute over mont
 
 **Goal:** Produce an approved Request Contract that the rest of the process can trust.
 
-**Roles:** BugLady drafts. PM owns. Dev and QA are consulted.
+**Roles:** The requirements agent drafts (or the PM, if you have no agent). PM owns. Dev and QA are consulted.
 
 **Time share:** 15–30% of request time. This is the lever that buys back the 23.5% incident rate that 85%+ AI teams currently absorb. Underspending here is the most common ADRIAN failure mode.
 
-### What BugLady produces
+### What Phase 1 produces
 
-BugLady interviews the user (or PM, or business stakeholder) in a chat inside the application — asking questions the way a product manager would, while analyzing the codebase, business goals, and compliance posture. The interview ends in the **Request Contract**: six core sections always (Summary, Description, User Impact, Business Context, Acceptance Criteria, Verification), plus conditional sections by request type (bug-shaped: Steps to Reproduce, Expected/Actual Behavior, Environment; feature-shaped: Boundaries, Constraints, Decisions, Technical Notes), **with the interview itself attached**. Full template in [`REQUEST-CONTRACT.md`](./REQUEST-CONTRACT.md).
+Intake interviews whoever has the need — a user, the PM, a business stakeholder — asking the questions a good product manager would, and analyzing the codebase, business goals, and compliance posture alongside. Where a requirements agent runs this, it happens as a chat and the agent drafts; where there is none, the PM runs the conversation and drafts from it.
 
-The contract lives in BugLady, not git. The interview is context for the dev team and verbatim input for the coding agents.
+Either way the output is the **Request Contract**: six core sections always (Summary, Description, User Impact, Business Context, Acceptance Criteria, Verification), plus conditional sections by request type (bug-shaped: Steps to Reproduce, Expected/Actual Behavior, Environment; feature-shaped: Boundaries, Constraints, Decisions, Technical Notes), **with the origin attached** — the interview transcript, or whatever else triggered the Request. Full template in [`REQUEST-CONTRACT.md`](./REQUEST-CONTRACT.md).
+
+The origin is not decoration. It's context for the dev team and verbatim input for the coding agents, and ambiguity that survives the structured sections is usually resolved by reading what the user actually said.
 
 ### What the PM does
 
@@ -63,7 +72,7 @@ The PM does not write the contract. The PM **pressure-tests and prioritizes** it
 
 | Check | Question | Failure action |
 |---|---|---|
-| Wrong-request | Read the Summary out loud. Is this what the user actually asked for in the interview? | Reject. Re-interview or correct. |
+| Wrong-request | Read the Summary out loud. Is this what the user actually asked for in the origin? | Reject. Re-interview or correct. |
 | Priority | User Impact and Business Context scored 1–5 with rationale? Product sets queue position | Score it. Priority drives the queue; the queue drives strategy. |
 | One-way door | Are any items in Decisions expensive to undo? | Flag for Dev consultation before approval. |
 | UX state coverage | For every screen touched: loading, empty, error, success states in Acceptance Criteria? | Add them. Most UX bugs are missing states, not bad design. |
@@ -77,7 +86,9 @@ QA: Reviews Acceptance for adversarial gaps (negative cases, edge cases, abuse c
 
 ### Phase 1 gate: Request Approval
 
-PM approves in BugLady. The Request Contract is now **locked** — it lives in the requirements tool (not git; the interview may contain customer PII that doesn't belong in a repository). The PR created in Phase 2 links back to the contract, and coding agents receive the contract plus the interview as context.
+PM approves in the requirements system. The Request Contract is now **locked**, the approval recorded with an owner and a timestamp. The PR created in Phase 2 links back to the contract, and coding agents receive the contract plus its origin as context.
+
+**Where the contract lives is your choice, with one constraint: customer PII never enters the repository.** A contract born from a customer interview belongs in the requirements system, with git holding only the PR that links to it. A contract written internally, with no customer-identifying content, can live in the repo and diff alongside the code. Both topologies are detailed in [`TOOLING.md`](./TOOLING.md).
 
 Locked means no mid-flight mutation. If the contract proves wrong or priorities change, the Request is **killed and respawned** with a corrected contract. This is what kills drift: 85%+ AI teams that mutate requirements mid-flight produce code that diverges from intent within two sprints.
 
@@ -189,7 +200,7 @@ Four things humans are uniquely good at:
 1. **Adversarial test design** — already done in Phase 2, runs automatically in CI
 2. **UX state verification** — manually walk every state in Acceptance on a real device. Cannot be cheaply automated. Should not be.
 3. **Production verification** — after deploy, confirm the metrics in Verification actually moved. If the contract said "reduce support tickets" and tickets didn't move, the feature didn't work, regardless of green tests.
-4. **Customer loop close** — talk to the customer who triggered the BugLady chat. This is the human connection the role exists for.
+4. **Customer loop close** — talk to the customer who triggered the Request. This is the human connection the role exists for.
 
 ### Deploy strategy by domain
 
@@ -212,13 +223,13 @@ Not "deployed." Verified. Defined as:
 
 ## PHASE 4 — ADAPT
 
-**Goal:** Lessons learned compound into two learners: the **team** (practices, contract template, gates) and the **agents** (`CLAUDE.md` rules, BugLady interview prompts, agent context).
+**Goal:** Lessons learned compound into two learners: the **team** (practices, contract template, gates) and the **agents** (`CLAUDE.md` rules, intake prompts, agent context).
 
 **Roles:** Whole team. Every day or every other day. 30–45 minutes.
 
 **Time share:** 5–10% of Request time, averaged.
 
-This is where most teams fail. They ship, declare victory, move on. The compounding gains in agentic development come from this phase — and the agent half of it is the part humans forget. Every lesson that only lands in a human's head is lost to the next agent run; every lesson encoded in `CLAUDE.md` or a BugLady prompt improves every future Request automatically. Skip this phase and you become a faster way to produce average code.
+This is where most teams fail. They ship, declare victory, move on. The compounding gains in agentic development come from this phase — and the agent half of it is the part humans forget. Every lesson that only lands in a human's head is lost to the next agent run; every lesson encoded in `CLAUDE.md` or an intake prompt improves every future Request automatically. Skip this phase and you become a faster way to produce average code.
 
 ### Two rituals
 
@@ -241,10 +252,10 @@ One meeting doing three jobs — **plan, check, learn**. Traditional Agile split
 - Did the contract hold, or was the Request killed/respawned? Why — priority shift (neutral) or contract defect (Phase 1 signal)?
 - Did the agent get stuck? Where? Why?
 - What's now in `CLAUDE.md` that wasn't before this Request?
-- Does BugLady's interview prompt need updating (a question it should have asked)?
+- Does the intake prompt need updating (a question that should have been asked)?
 - Tag the Request: `clean` / `churn` / `incident`
 
-Every meeting ends with a change to something — `CLAUDE.md`, the BugLady interview prompt, the Request Contract template, the gates, or the dashboard thresholds — or an explicit decision that nothing needs changing. One quiet meeting is fine. **A week of Quality Reviews that produced no change is a failed week.**
+Every meeting ends with a change to something — `CLAUDE.md`, the intake prompt, the Request Contract template, the gates, or the dashboard thresholds — or an explicit decision that nothing needs changing. One quiet meeting is fine. **A week of Quality Reviews that produced no change is a failed week.**
 
 **2. Monthly Tech Radar (45 min, team)**
 
@@ -255,7 +266,7 @@ What did we learn? What goes into the team's adopt / trial / hold / drop list? W
 Tag every PR with:
 
 - AI-generation percentage (rough estimate is fine)
-- Request Contract it implements (BugLady link)
+- Request Contract it implements (link into the requirements system)
 - Mutation score on touched files
 - Domain (compliance flag from the contract)
 - Reviewer
@@ -285,7 +296,7 @@ ADRIAN does not have sprints. Phases run per-request, not per-team-cadence. Mult
 
 Honest invalidators. If you see any of these, stop and fix before continuing.
 
-1. **BugLady's contract quality plateaus low.** The Request Contract is load-bearing. If BugLady output is <80% as good as your best human PM on equivalent work, fix BugLady before scaling the methodology.
+1. **Contract quality plateaus low.** The Request Contract is load-bearing. If your drafted contracts are <80% as good as your best human PM on equivalent work, fix intake — the agent's prompt, or the PM's interview discipline — before scaling the methodology.
 2. **`CLAUDE.md` is treated as documentation instead of executable rules.** Audit by asking the agent to deliberately violate a rule. If it does, the rules aren't strong enough.
 3. **Regulated work gets the "named reviewer" requirement dropped under deadline pressure.** Don't. The audit trail is non-negotiable. See [`FLEX-MODES.md`](./FLEX-MODES.md).
 4. **The Quality Review becomes status.** It exists to plan, check, and change something. If it degrades into a round-robin of yesterday's work, kill it and replace it.
@@ -295,7 +306,7 @@ Honest invalidators. If you see any of these, stop and fix before continuing.
 
 ## Versioning
 
-This is ADRIAN v0.1.
+This is ADRIAN v0.2.
 
 Major versions change the phase structure or the role definitions.
 Minor versions change templates, thresholds, or gate checklists.

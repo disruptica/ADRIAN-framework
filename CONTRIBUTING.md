@@ -1,6 +1,6 @@
 # Contributing to ADRIAN
 
-ADRIAN is v0.1 — actively evolving. Contributions are welcome, and the contribution process uses ADRIAN's own methodology (the project eats its own cooking).
+ADRIAN is v0.2 — actively evolving. Contributions are welcome, and the contribution process uses ADRIAN's own methodology (the project eats its own cooking).
 
 ---
 
@@ -8,7 +8,7 @@ ADRIAN is v0.1 — actively evolving. Contributions are welcome, and the contrib
 
 - **Author / Maintainer:** Jay (Jairo) Anaya
 - **Origin & steward:** [Disruptica](https://disruptica.com) — ADRIAN was born at Disruptica and is the framework used internally on its products
-- **Companion tool:** [BugLady](https://buglady.ai)
+- **Reference implementation:** [BugLady](https://buglady.ai) — where ADRIAN was proven, not a dependency of it
 
 ---
 
@@ -23,6 +23,8 @@ ADRIAN is v0.1 — actively evolving. Contributions are welcome, and the contrib
 | New language template | Rust, Java, Ruby `CLAUDE.md` template | PR directly |
 | Methodology changes | A new phase, a new role, a new gate | Issue first — these are larger discussions |
 | Threshold updates | "Our team's mutation score baseline was different" | Comment on `QUALITY-DASHBOARD.md` rather than changing canonical values |
+| Tool-shaped assumptions | A doc that only works if you own a particular product — see the six requirements in [`TOOLING.md`](./TOOLING.md) | GitHub issue; these are treated as bugs |
+| New tooling adapter | "Here's how ADRIAN maps onto Kiro / Spec Kit / Linear" | PR against [`TOOLING.md`](./TOOLING.md) |
 
 ---
 
@@ -80,7 +82,7 @@ The maintainer reviews on four dimensions:
 
 - **Methodology fit** — does this respect ADRIAN's principles?
 - **Honesty** — does this overstate what's been validated in practice?
-- **Backward compatibility** — does this break v0.1 users?
+- **Backward compatibility** — does this break existing users?
 - **Documentation quality** — is it clear, terse, and load-bearing?
 
 ### 5. Merge and version bump (Phase 3: Deliver)
