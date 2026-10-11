@@ -1,19 +1,21 @@
 # The Request Contract
 
-The Request Contract is the artifact BugLady produces from a chat interview and the PM approves. It is the single most important artifact in ADRIAN. Everything downstream — code, tests, deploys, verification — derives from it.
+The Request Contract is the artifact intake produces and the PM approves. It is the single most important artifact in ADRIAN. Everything downstream — code, tests, deploys, verification — derives from it.
 
-**Where it lives:** in the requirements tool (BugLady), NOT in git. The interview may contain customer names, screenshots, and context that don't belong in a repository. Git gets the PR; the PR links back to the Request Contract. Coding agents receive the contract (including the interview) as context at implementation time.
+**Where it lives:** in your requirements system, locked at approval and addressable by a stable link. Whether that system is inside or outside git is your choice, bounded by one rule: **customer PII never enters the repository.** A contract carrying a customer interview belongs outside git, with the PR linking back to it; a contract written internally, with no customer-identifying content, can live in the repo and diff alongside the code. Both topologies, and what ADRIAN requires of any requirements system, are in [`TOOLING.md`](./TOOLING.md).
+
+Coding agents receive the contract and its origin as context at implementation time.
 
 ---
 
 ## How a Request Contract is born
 
-1. A user, the PM, or the business opens a chat with BugLady inside the application
-2. BugLady interviews like a product manager would — asking about the problem, the impact, the context — while analyzing the codebase, business goals, and compliance posture
-3. The interview ends in a structured Request Contract, **with the interview transcript attached** so the dev team can see the raw context and the coding agent gets it verbatim
+1. A user, the PM, or the business raises a need — ideally in a conversation, in the application, where a requirements agent can interview them directly
+2. Intake asks what a product manager would ask — the problem, the impact, the context — while analyzing the codebase, business goals, and compliance posture. A requirements agent does this in a chat; without one, the PM does it in a call or a thread
+3. It ends in a structured Request Contract, **with the origin attached** so the dev team can see the raw context and the coding agent gets it verbatim
 4. The PM pressure-tests, sets the priority, and approves
 
-The interview transcript is not decoration. Ambiguity that survives the structured sections is often resolved by reading what the user actually said.
+The origin is not decoration. Ambiguity that survives the structured sections is often resolved by reading what the user actually said.
 
 ---
 
@@ -26,7 +28,7 @@ The contract is **flexible by request type**. Six sections are always required; 
 | Section | Purpose |
 |---|---|
 | **Summary** | One sentence or short paragraph of what the user wants, in their words. This is the intent — if the team can't agree "yes, that's it," everything downstream is wrong |
-| **Description** | The fuller narrative: what's happening, what should happen, relevant context from the interview |
+| **Description** | The fuller narrative: what's happening, what should happen, relevant context from the origin |
 | **User Impact** | Who is affected, how many, how badly. One of the two priority inputs |
 | **Business Context** | Why this matters to the business: revenue, churn risk, compliance deadline, strategic bet. The other priority input |
 | **Acceptance Criteria** | Scenarios that must pass — positive, negative, edge, UX states. Becomes the automated test suite |
@@ -50,13 +52,17 @@ The contract is **flexible by request type**. Six sections are always required; 
 | **Boundaries** | In scope / out of scope / deferred — stops scope creep and agent improvisation |
 | **Constraints** | Compliance flag (none/SOC2/HIPAA/PCI/gov), perf budgets, data classification, architectural rules |
 | **Decisions** | Prior choices this Request must respect (from ADRs, `CLAUDE.md`, adjacent Requests) — the drift killer |
-| **Technical Notes** | BugLady's codebase analysis: suspected files, related modules, prior similar changes. Advisory, not binding |
+| **Technical Notes** | Codebase analysis: suspected files, related modules, prior similar changes. Produced by the requirements agent where one runs, by Dev where none does. Advisory, not binding |
 
 ### Always attached
 
 | Item | Purpose |
 |---|---|
-| **The interview** | The full BugLady chat that produced this contract. Context for the dev team; verbatim input for the coding agent. Stays in the requirements tool |
+| **Origin** | What triggered this Request, in its rawest available form. Context for the dev team; verbatim input for the coding agent |
+
+**Origin is required; its form depends on your intake.** Where intake is conversational, origin is the full interview transcript — that's the highest-value version, and the one coding agents benefit from most. Where it isn't, origin names the actual trigger: the support ticket, the incident, the customer email, the analytics query, the sales call note. What ADRIAN forbids is a contract with no traceable source, because that's a contract someone invented.
+
+If the origin contains customer-identifying content and your contract lives in git, reference the origin rather than pasting it.
 
 **The compliance flag rule still applies:** any Request touching PII, PHI, card data, or a regulated domain must carry Constraints with the flag set, regardless of request type. A bug fix in a HIPAA app is still HIPAA work.
 
@@ -117,14 +123,14 @@ Then the UI shows the timeout error state with retry (all browsers)
 - Manual check on real Safari (macOS + iOS) by QA
 - Confirm with the CS team lead who reported it
 
-## Technical Notes (BugLady codebase analysis)
+## Technical Notes (codebase analysis)
 The refund confirmation listens on an EventSource; Safari's EventSource
 handling differs after the response-stream change in Tuesday's deploy
 (PR #482). Suspect `refund-status-stream.ts`. Related: order-status uses
 the same pattern and may be silently affected.
 
-## Interview
-[Attached — 14-message chat with CS team lead, in BugLady]
+## Origin
+[Attached — 14-message interview with the CS team lead]
 ```
 
 A feature-shaped Request uses the same core six plus Boundaries, Constraints, Decisions, and Technical Notes instead of the reproduce/expected/actual/environment quartet.
@@ -136,15 +142,15 @@ A feature-shaped Request uses the same core six plus Boundaries, Constraints, De
 Requests are sized for **hours to days**, not weeks. That sizing is what makes ADRIAN's speed safe:
 
 - **The contract is locked at approval.** No mid-flight mutation — mutation is how drift happens.
-- **If priorities shift or the contract turns out wrong mid-flight: kill the Request and respawn a new one.** The new contract inherits the interview and whatever survived. Killing is cheap because the unit is small.
+- **If priorities shift or the contract turns out wrong mid-flight: kill the Request and respawn a new one.** The new contract inherits the origin and whatever survived. Killing is cheap because the unit is small.
 - **Killing is not failure.** ADRIAN rewards change; the respawn IS the system working. What gets tracked is *why*: killed-for-priority is neutral (the squash game), killed-for-contract-defect is a Phase 1 signal (see the Respawn Rate metric in [`QUALITY-DASHBOARD.md`](./QUALITY-DASHBOARD.md)).
-- **If a Request can't be sized to days, it isn't one Request.** BugLady (or the PM) splits it before approval.
+- **If a Request can't be sized to days, it isn't one Request.** Intake splits it before approval — the agent proposes the split, the PM decides.
 
 ---
 
-## How BugLady should be prompted
+## How to prompt a requirements agent
 
-[BugLady](https://buglady.ai) conducts the interview and produces the contract. Suggested system-level instructions:
+If a requirements agent conducts your intake, this is the behavior to prompt it for. If the PM conducts intake instead, read it as the interview checklist — the content is the same, only the interviewer changes.
 
 ```
 You are a product manager interviewing a user inside their application.
@@ -178,7 +184,7 @@ conversation, ask one more question rather than guessing.
 
 ## Contract quality red flags — PM checklist
 
-Send the contract back to BugLady (or re-interview) if any of these are true:
+Send the contract back for redraft (or re-interview) if any of these are true:
 
 - [ ] Summary doesn't sound like something the user actually said or wants
 - [ ] User Impact or Business Context is unscored or scored without rationale
@@ -189,4 +195,4 @@ Send the contract back to BugLady (or re-interview) if any of these are true:
 - [ ] Feature-shaped but Boundaries has no "out of scope" items
 - [ ] Touches sensitive data but Constraints/compliance flag is missing
 - [ ] Too big to deliver in days and not split
-- [ ] The interview is missing or truncated
+- [ ] The origin is missing, truncated, or untraceable
