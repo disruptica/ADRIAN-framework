@@ -214,26 +214,21 @@ Not "deployed." Verified. Defined as:
 
 **Goal:** Lessons learned compound into two learners: the **team** (practices, contract template, gates) and the **agents** (`CLAUDE.md` rules, BugLady interview prompts, agent context).
 
-**Roles:** Whole team. Weekly. 30 minutes.
+**Roles:** Whole team. Every day or every other day. 30–45 minutes.
 
 **Time share:** 5–10% of Request time, averaged.
 
 This is where most teams fail. They ship, declare victory, move on. The compounding gains in agentic development come from this phase — and the agent half of it is the part humans forget. Every lesson that only lands in a human's head is lost to the next agent run; every lesson encoded in `CLAUDE.md` or a BugLady prompt improves every future Request automatically. Skip this phase and you become a faster way to produce average code.
 
-### Three rituals
+### Two rituals
 
-**1. Request Retro (per Request, 10 min, async-OK)**
+**1. Quality Review (30–45 min, sync, whole team, every day or every other day)**
 
-Five questions:
-- Did the contract hold, or was the Request killed/respawned? Why — priority shift (neutral) or contract defect (Phase 1 signal)?
-- Did the agent get stuck? Where? Why?
-- What's now in `CLAUDE.md` that wasn't before this Request?
-- Does BugLady's interview prompt need updating (a question it should have asked)?
-- Tag the Request: `clean` / `churn` / `incident`
+One meeting doing three jobs — **plan, check, learn**. Traditional Agile splits these into planning, standup, and retro on a weekly loop; at AI request speed that loop is too slow to steer anything, so ADRIAN merges them and runs them on the request cadence. Cadence and format in [`ROLES.md`](./ROLES.md#the-team-cadence); timings in [`QUALITY-DASHBOARD.md`](./QUALITY-DASHBOARD.md).
 
-**2. Weekly Quality Review (30 min, sync, whole team)**
+*Plan* — what enters Phase 1 next, what's blocked, what gets killed or respawned and why.
 
-Look at five numbers. Details in [`QUALITY-DASHBOARD.md`](./QUALITY-DASHBOARD.md):
+*Check* — five numbers. Details in [`QUALITY-DASHBOARD.md`](./QUALITY-DASHBOARD.md):
 
 - Respawn rate (split by cause: priority vs. contract defect)
 - First-time CI pass rate for AI PRs
@@ -241,9 +236,17 @@ Look at five numbers. Details in [`QUALITY-DASHBOARD.md`](./QUALITY-DASHBOARD.md
 - 30-day rework rate on AI-touched code
 - Change failure rate
 
-This meeting must produce a change to something — `CLAUDE.md`, the BugLady interview prompt, the Request Contract template, the gates, or the dashboard thresholds. **A Weekly Quality Review that produced no change is a failed meeting.**
+*Learn* — retro on every Request that completed or was killed since the last meeting. Five questions:
 
-**3. Monthly Tech Radar (45 min, team)**
+- Did the contract hold, or was the Request killed/respawned? Why — priority shift (neutral) or contract defect (Phase 1 signal)?
+- Did the agent get stuck? Where? Why?
+- What's now in `CLAUDE.md` that wasn't before this Request?
+- Does BugLady's interview prompt need updating (a question it should have asked)?
+- Tag the Request: `clean` / `churn` / `incident`
+
+Every meeting ends with a change to something — `CLAUDE.md`, the BugLady interview prompt, the Request Contract template, the gates, or the dashboard thresholds — or an explicit decision that nothing needs changing. One quiet meeting is fine. **A week of Quality Reviews that produced no change is a failed week.**
+
+**2. Monthly Tech Radar (45 min, team)**
 
 What did we learn? What goes into the team's adopt / trial / hold / drop list? When did the agent surprise us — good or bad? What should we change in the framework itself?
 
@@ -272,8 +275,9 @@ If your team is coming from Scrum, Kanban, or Shape Up:
 | Implement (Phase 2) | Sprint execution | In-progress | Building |
 | Deliver (Phase 3) | Sprint review / Done | Done | Cool-down validation |
 | Adapt (Phase 4) | Retro | Service review | Cool-down |
+| Quality Review | Planning + standup + retro, merged | Replenishment + cadence review | Betting table (lighter) |
 
-ADRIAN does not have sprints. Phases run per-request, not per-team-cadence. Multiple requests are in flight at once at different phases.
+ADRIAN does not have sprints. Phases run per-request, not per-team-cadence. Multiple requests are in flight at once at different phases. The one recurring meeting — the Quality Review — replaces Scrum's planning, standup, and retro with a single 30–45 minute block every day or every other day.
 
 ---
 
@@ -284,7 +288,7 @@ Honest invalidators. If you see any of these, stop and fix before continuing.
 1. **BugLady's contract quality plateaus low.** The Request Contract is load-bearing. If BugLady output is <80% as good as your best human PM on equivalent work, fix BugLady before scaling the methodology.
 2. **`CLAUDE.md` is treated as documentation instead of executable rules.** Audit by asking the agent to deliberately violate a rule. If it does, the rules aren't strong enough.
 3. **Regulated work gets the "named reviewer" requirement dropped under deadline pressure.** Don't. The audit trail is non-negotiable. See [`FLEX-MODES.md`](./FLEX-MODES.md).
-4. **The Weekly Quality Review becomes status.** It exists to change something. If it doesn't, kill it and replace it.
+4. **The Quality Review becomes status.** It exists to plan, check, and change something. If it degrades into a round-robin of yesterday's work, kill it and replace it.
 5. **Mutation testing gets disabled because it's slow.** Move it to nightly + critical-path-only in CI rather than disabling. The signal is too valuable.
 
 ---
