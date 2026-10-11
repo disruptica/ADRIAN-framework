@@ -52,7 +52,7 @@ Print these. Use them. They're terse on purpose.
 
 ## Gate 3 → Verified in Prod (Deliver → Adapt)
 
-**Owner:** QA / Success. Signs in the request retro.
+**Owner:** QA / Success. Signs in the retro block of the next Quality Review.
 
 **Cannot proceed if any answer is "no":**
 
@@ -65,7 +65,7 @@ Print these. Use them. They're terse on purpose.
 - [ ] If compliance flag was PCI/HIPAA/gov: named human approver signed the prod promotion
 - [ ] If compliance flag was SOC2: change attribution recorded for audit log
 
-**On gate pass:** Request is "done." Triggers Request Retro in Phase 4.
+**On gate pass:** Request is "done." Goes into the retro block of the next Quality Review (Phase 4).
 
 ---
 
@@ -98,7 +98,7 @@ The request does not "fail." It moves back to the prior phase with a documented 
 
 **Gate 3 failure (Verified in Prod):**
 - If Verification signals didn't move: the feature is technically done but didn't achieve the Intent. This is the most important failure to surface. Do NOT close the request. Treat it as a new Phase 1 input.
-- If a regulated-mode signoff is missing: the deploy should not have happened. Roll back, fix the process, re-deploy with proper signoff. This is a process violation worth a Weekly Quality Review item.
+- If a regulated-mode signoff is missing: the deploy should not have happened. Roll back, fix the process, re-deploy with proper signoff. This is a process violation worth a Quality Review item.
 
 ---
 

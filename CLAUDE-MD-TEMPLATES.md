@@ -14,7 +14,7 @@ Three templates follow, one per language archetype. Copy, fill in, commit.
 2. Fill in the `<...>` placeholders
 3. Add stack-specific "never do" rules from your house style
 4. Add a compliance section if the repo runs in a regulated mode
-5. Commit it. Update it whenever a Weekly Quality Review surfaces a pattern.
+5. Commit it. Update it whenever a Quality Review surfaces a pattern.
 
 **Test the rules.** Once committed, ask the agent to deliberately violate one. If it does, the rule isn't strong enough — make it more concrete.
 

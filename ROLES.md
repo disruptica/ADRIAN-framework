@@ -40,7 +40,7 @@ If you find yourself wanting a fourth role, the question to ask first is: *what 
 - Co-own the customer loop close with QA
 
 **Phase 4 — Adapt**
-- Bring defect-respawn patterns to the Weekly Quality Review
+- Bring defect-respawn patterns to the Quality Review
 - Update the Request Contract template when patterns repeat
 
 ### What the PM does NOT do
@@ -48,7 +48,7 @@ If you find yourself wanting a fourth role, the question to ask first is: *what 
 - Type specs by hand (BugLady does the draft)
 - Manage developer assignments (the team self-manages)
 - Review code (Dev does)
-- Run standups (no standups in ADRIAN)
+- Run standups (ADRIAN has no standups — the Quality Review is a decision meeting, not status)
 - Translate between customer and engineer in real time (BugLady's chat is the bridge)
 
 ### When the PM should escalate
@@ -83,7 +83,7 @@ If you find yourself wanting a fourth role, the question to ask first is: *what 
 - Named approver on regulated-mode deploys (see [`FLEX-MODES.md`](./FLEX-MODES.md))
 
 **Phase 4 — Adapt**
-- Bring agent-stuck patterns to Weekly Quality Review
+- Bring agent-stuck patterns to Quality Review
 - Propose `CLAUDE.md` changes
 - Audit `CLAUDE.md` adherence (ask the agent to deliberately violate a rule)
 
@@ -129,7 +129,7 @@ The role name is two words on purpose. **QA without Success becomes a gatekeeper
 - Close the customer loop — talk to the customer who triggered the BugLady chat
 
 **Phase 4 — Adapt**
-- Bring "tests passed but feature was wrong" patterns to Weekly Quality Review
+- Bring "tests passed but feature was wrong" patterns to Quality Review
 - Bring UX state gaps to the Request Contract template
 - Track customer satisfaction signals over time
 
@@ -162,32 +162,39 @@ The team **does** escalate when:
 - A request touches another team's domain
 - Compliance flag is unclear
 - A one-way-door decision wasn't in the contract's Decisions section
-- Weekly Quality Review numbers trend wrong for two consecutive weeks
+- Quality Review numbers trend wrong for two consecutive weeks
 
 **Self-managing ≠ unsupervised.** Supervision is the metrics and the gates, not a manager-in-the-loop.
 
 ---
 
-## What a typical week looks like per role
+## The team cadence
+
+One meeting. Every day or every other day. 30–45 minutes. Whole team. In that single meeting the team does **planning, the daily check, and the retro**.
+
+Requests move fast enough that a weekly loop is too slow to steer them — at AI speed, the request you would have corrected on Tuesday has already shipped by Friday. So ADRIAN collapses the three Agile ceremonies into one short meeting running on the request cadence instead of a calendar cadence. Same three jobs — **plan, check, learn** — just at the speed the requests actually move.
+
+### The three blocks
+
+| Block | What |
+|---|---|
+| **Plan** | What enters Phase 1 next, what's blocked, what gets killed or respawned (with the cause tagged) |
+| **Check** | The five dashboard numbers. Anything in watch or alert gets one root-cause hypothesis |
+| **Learn** | Retro on every Request that completed or was killed since the last meeting — the five retro questions (see [`METHODOLOGY.md`](./METHODOLOGY.md#phase-4--adapt)) |
+
+On a 30-minute day the blocks compress. The Learn block is the one that must not be cut. Full agenda and timings in [`QUALITY-DASHBOARD.md`](./QUALITY-DASHBOARD.md).
+
+Each role brings something specific: the PM brings contract defects and customer signal, the Dev brings `CLAUDE.md` changes and agent-stuck patterns, QA brings adversarial-test and UX-verification findings.
+
+### Honest note on where we actually are
+
+We haven't fully landed this ourselves. Our own team still runs the old shape underneath: Monday plans most of the week, Friday carries the bigger retro, and the meetings in between are shorter. We suspect we'll transition to a true daily cadence soon — the pull toward it is real — but we haven't done it yet, so treat the daily version as the direction, not as battle-tested practice.
+
+### What this is not
+
+It is not a standup. Status lives on the request board, not in a round-robin of what everyone did yesterday. If the meeting turns into status reporting, it has failed — cut it and restart with the three blocks above.
 
 This is a sketch, not a prescription. Adjust to your request cadence.
-
-### PM
-- Mon: Review weekend BugLady drafts, approve or send back
-- Tue–Thu: On-call for clarifications, customer chats
-- Fri: Weekly Quality Review (joint), plan next week's request priorities
-
-### Dev
-- Mon–Thu: Active requests — context loading, agent steering, review, refactor
-- Fri morning: `CLAUDE.md` updates from the week's learnings
-- Fri afternoon: Weekly Quality Review (joint)
-
-### QA / Success
-- Mon: Adversarial test design for new requests
-- Tue–Thu: UX verification on requests entering Phase 3, customer loop closes
-- Fri: Weekly Quality Review (joint), customer signal aggregation
-
-No standups. Status is the request board.
 
 ---
 

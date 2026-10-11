@@ -8,7 +8,7 @@ Each metric has:
 - **Healthy / watch / alert thresholds**
 - **What it triggers when it goes wrong**
 
-Reviewed weekly in the 30-minute Weekly Quality Review. The review must produce a change to something — `CLAUDE.md`, the Request Contract, the gates, or the thresholds themselves. A review that produced no change failed.
+Reviewed in the Quality Review — the team's one recurring meeting, 30–45 minutes, every day or every other day (see [`ROLES.md`](./ROLES.md#the-team-cadence)). The review must produce a change to something — `CLAUDE.md`, the Request Contract, the gates, or the thresholds themselves — or an explicit decision that nothing needs changing. A week of reviews that produced no change failed.
 
 ---
 
@@ -56,7 +56,7 @@ Track both. Only the defect rate has thresholds — priority kills are expected 
 
 ### What it triggers
 
-**Watch:** Bring two defect-killed contracts to the Weekly Quality Review. Discuss the pattern — was it a question BugLady should have asked, missing codebase context in Technical Notes, or a PM pressure-test miss?
+**Watch:** Bring two defect-killed contracts to the Quality Review. Discuss the pattern — was it a question BugLady should have asked, missing codebase context in Technical Notes, or a PM pressure-test miss?
 
 **Alert:** Hold all non-urgent new Requests for one week. Use the time to:
 - Update BugLady's interview prompt with the recurring miss pattern
@@ -202,7 +202,7 @@ DORA standard:
 cfr = (deploys_requiring_remediation_this_period / total_deploys_this_period) * 100
 ```
 
-Per-service or aggregate. Aggregate is what to watch in the Weekly Quality Review.
+Per-service or aggregate. Aggregate is what to watch in the Quality Review.
 
 ### Thresholds
 
@@ -219,7 +219,7 @@ The 2026 data shows AI-first teams without ADRIAN-style controls land in the 10�
 
 **Healthy:** No action. Don't optimize what's working.
 
-**High band:** Bring last week's failures to the Weekly Quality Review. Categorize each:
+**High band:** Bring the period's failures to the Quality Review. Categorize each:
 - Contract quality (Phase 1 issue)
 - Implementation quality (Phase 2 issue — agent, review, or refactor gap)
 - Pipeline gap (Phase 3 — a check should have caught it)
@@ -233,7 +233,7 @@ Add one pipeline check or one `CLAUDE.md` rule per category to prevent the next 
 
 ## The dashboard format
 
-Keep it simple. Notion page, GitHub README, plain text — doesn't matter. Update weekly.
+Keep it simple. Notion page, GitHub README, plain text — doesn't matter. The numbers stay weekly-windowed; refresh the snapshot weekly and the Quality Review reads the current one every time it meets.
 
 ```markdown
 # Quality Dashboard — Week of <date>
@@ -289,15 +289,18 @@ These metrics can be useful tools at the individual level (e.g., a Dev tuning th
 
 ---
 
-## What the Weekly Quality Review meeting looks like
+## What the Quality Review meeting looks like
 
-30 minutes. Same time every week. Whole team.
+30–45 minutes. Whole team. Every day or every other day — the cadence follows request throughput, not the calendar. Three blocks: **plan, check, learn**. The dashboard owns the check block.
 
 | Time | What |
 |---|---|
-| 0–5 min | Read the dashboard. No discussion. |
-| 5–15 min | Discuss any metric in watch or alert. One root cause hypothesis per metric. |
-| 15–25 min | Decide one change to make this week. Owner assigned. |
-| 25–30 min | Confirm: what's the change, who owns it, when it lands, how we'll measure if it worked. |
+| 0–10 min | **Plan.** What enters Phase 1 next, what's blocked, what gets killed or respawned. |
+| 10–15 min | **Check.** Read the dashboard. No discussion. |
+| 15–25 min | Discuss any metric in watch or alert. One root cause hypothesis per metric. |
+| 25–35 min | **Learn.** Retro any Request completed or killed since the last meeting. Decide one change. Owner assigned. |
+| 35–45 min | Confirm: what's the change, who owns it, when it lands, how we'll measure if it worked. |
 
-If the meeting ends without a change owner-and-deadline, the meeting failed. Cancel it next week and replace with something that produces change.
+On a 30-minute day, compress proportionally — the Learn block is the one that must not be cut.
+
+A single meeting with nothing to change is fine; say so explicitly and move on. But if a full week of these ends without one change owner-and-deadline, the cadence failed. Restart with a stricter format, or stretch the cadence until each meeting has real material.

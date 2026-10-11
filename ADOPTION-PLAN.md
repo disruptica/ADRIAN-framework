@@ -84,7 +84,7 @@ Tell the team in week 0 that ADRIAN is coming, share the README, and get questio
 ### Common week 2 failures
 
 - BugLady produces specs missing 2–3 sections. Update BugLady's prompt; don't backfill manually.
-- PM rubber-stamps specs to keep velocity. Watch for this in the Request Retros — if no specs were rejected, the PM either has perfect input or isn't pressure-testing.
+- PM rubber-stamps specs to keep velocity. Watch for this in the retros — if no specs were rejected, the PM either has perfect input or isn't pressure-testing.
 - Devs say "this is more process." Show them the defect-respawn data after two weeks — contracts born from BugLady interviews fail far less often than the vague tickets they replace.
 
 ---
@@ -140,25 +140,27 @@ Tell the team in week 0 that ADRIAN is coming, share the README, and get questio
 
 ## Week 5 — Add Phase 4 rituals
 
-**Goal:** Request Retros and Weekly Quality Review become habit.
+**Goal:** The Quality Review becomes habit — plan, check, and learn in one short meeting.
 
 ### What to do
 
-- Request Retro (10 min) on every completed request
-- First Weekly Quality Review at end of week 5 — review the dashboard, decide one change
+- Start the Quality Review: 30–45 min, whole team, every other day to begin with (see [`ROLES.md`](./ROLES.md#the-team-cadence))
+- Run all three blocks from day one — plan, check, learn. The retro block covers every request completed or killed since the last meeting
+- Tighten toward daily once the meeting consistently has material; stretch it if it doesn't
 - Add the remaining two metrics to the dashboard (respawn rate with defect split, 30-day rework rate)
 - The first Monthly Tech Radar happens at end of month 1 (week 4 or 5 depending on calendar)
 
 ### What success looks like at end of week 5
 
-- The Weekly Quality Review produced a concrete change (a `CLAUDE.md` update, a Request Contract change, or a gate adjustment)
-- Request Retros are happening, async is fine, but they're happening
+- The Quality Review produced at least one concrete change this week (a `CLAUDE.md` update, a Request Contract change, or a gate adjustment)
+- Every request that completed or was killed got its five retro questions answered in a Quality Review
 - The dashboard has 4 weeks of data — trends are visible
 
 ### Common week 5 failures
 
-- Weekly Quality Review becomes a status meeting. Cancel it next week and restart with a stricter format. If it doesn't produce a change, it failed.
-- Request Retros are skipped. Make them a Gate 3 item — "request retro complete" is on the checklist.
+- The Quality Review becomes a status meeting — a round-robin of yesterday's work. Cancel it for a week and restart with a stricter format. If it doesn't produce change, it failed.
+- The retro block gets dropped whenever the meeting runs long. It's the block that must not be cut. Make it a Gate 3 item — "retro questions answered in a Quality Review" is on the checklist.
+- The team goes daily before it has daily-sized material, and the meeting empties out. Every other day is the safe starting cadence.
 
 ---
 
@@ -252,10 +254,10 @@ These will happen. Watch for them.
 ### "We'll do it properly later"
 A Dev skips the symbol footprint check because they're "almost done." A PM rubber-stamps a contract because the customer is waiting. QA skips the customer loop because "we'll catch it in the next request."
 
-These are the same pattern: trading methodology rigor for short-term speed. Every instance compounds. Surface them in the Request Retro and the Weekly Quality Review.
+These are the same pattern: trading methodology rigor for short-term speed. Every instance compounds. Surface them in the Quality Review.
 
 ### Methodology theater
-The team does Request Retros without changing anything. Updates the dashboard without acting on it. Names compliance reviewers who don't actually review.
+The team runs Quality Reviews without changing anything. Updates the dashboard without acting on it. Names compliance reviewers who don't actually review.
 
 This is worse than skipping the methodology — it produces evidence of process for audits without producing actual quality. Detect via the "what changed this week?" question. If the answer is nothing, the rituals are theater.
 
@@ -280,9 +282,9 @@ Worse than inflation. Detected only by audit (potentially years later, by then v
 
 The point of ADRIAN is to do less of some things, not more. Things to stop:
 
-- Stop daily standups. The request board is the status. If you need a sync, it's a Request Retro.
+- Stop daily standups. The request board is the status. The daily sync you keep is the Quality Review — a plan/check/learn decision meeting, not a round-robin.
 - Stop manual story estimation. Requests aren't estimated; they're sized to one request = one independently shippable change.
-- Stop sprint planning meetings of >30 min. The unit of planning is a request, not a sprint.
+- Stop separate sprint planning, standup, and retro meetings. They collapse into one 30–45 minute Quality Review. The unit of planning is a request, not a sprint.
 - Stop hand-writing tests that the Acceptance Criteria already imply. Generate them from the contract.
 - Stop reviewing code style in PRs. The linter does that. Reviewers focus on the four dimensions.
 - Stop writing tickets that are vaguer than the Request Contract. If the ticket can't be a Request, it's not ready.
