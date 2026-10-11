@@ -228,7 +228,7 @@ Tell the team in week 0 that ADRIAN is coming, share the README, and get questio
 
 ### What "done" means
 
-It doesn't. ADRIAN v0.1 is the starting point. The team owns the methodology now. Quarterly:
+It doesn't. ADRIAN v0.2 is the starting point. The team owns the methodology now. Quarterly:
 
 - Review the methodology itself in the Monthly Tech Radar
 - Promote local adaptations to the canonical doc

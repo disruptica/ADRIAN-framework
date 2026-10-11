@@ -10,7 +10,7 @@ If you find prior art for anything labeled "original," please open an issue — 
 
 ### Spec-driven development as the spine
 
-The idea that requirements are executable contracts, not passive documentation, is from the spec-driven development movement that emerged in late 2025 and accelerated in 2026. ADRIAN adapts it into **request-driven** contracts: the contract is born from a user interview, carries the interview as agent context, and lives in the requirements tool rather than the repository.
+The idea that requirements are executable contracts, not passive documentation, is from the spec-driven development movement that emerged in late 2025 and accelerated in 2026. ADRIAN adapts it into **request-driven** contracts: the contract is born from a user interview, carries that origin as agent context, and may live outside the repository when the origin carries customer PII.
 
 - GitHub Spec Kit (2025, ongoing) — the most widely-used implementation
 - Augment Code's Intent platform with the Coordinator/Implementor/Verifier pattern
@@ -106,8 +106,8 @@ Claude Code, Cursor, Aider, Continue, Cody, Windsurf — all are reasonable. ADR
 ### Vibe coding
 Vibe coding (Karpathy's term, early 2025) is a legitimate mode for prototyping and personal projects. ADRIAN is explicitly the post-vibe-coding methodology — the one you adopt when "passes basic tests" isn't enough. They aren't competitors; they're tools for different contexts.
 
-### A specific BugLady implementation
-[BugLady](https://buglady.ai) is the companion tool to ADRIAN, developed alongside the methodology. ADRIAN describes what BugLady should produce (the Request Contract) and how it should behave (drafts, doesn't approve), but doesn't prescribe how BugLady is built internally. The methodology stands without it — the PM does more drafting — but the two are designed to compose.
+### A required requirements tool
+ADRIAN specifies an interface, not a product: six things a requirements system must do (see [`TOOLING.md`](./TOOLING.md)). Anything satisfying them runs the methodology — an in-app agent, a spec-driven toolchain with the spec in the repo, or an issue tracker plus a disciplined PM. [BugLady](https://buglady.ai) is the reference implementation, developed alongside the methodology at Disruptica and named only in the README, `TOOLING.md`, and here. The earlier framing of ADRIAN as BugLady's companion framework was a coupling that limited the methodology without improving it.
 
 ---
 

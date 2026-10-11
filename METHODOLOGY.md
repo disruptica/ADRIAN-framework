@@ -306,7 +306,7 @@ Honest invalidators. If you see any of these, stop and fix before continuing.
 
 ## Versioning
 
-This is ADRIAN v0.1.
+This is ADRIAN v0.2.
 
 Major versions change the phase structure or the role definitions.
 Minor versions change templates, thresholds, or gate checklists.
