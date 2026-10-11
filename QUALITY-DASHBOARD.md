@@ -36,7 +36,7 @@ If you can only track three: pick **defect respawn rate, mutation score, and cha
 How often an approved Request gets killed and respawned. Contracts are locked at approval — mid-flight change means kill-and-respawn, never mutation. The rate itself isn't the signal; **the cause split is**:
 
 - **Killed for priority** — the queue reshuffled and this Request no longer mattered. Neutral to good: ADRIAN rewards change; this is the squash game working.
-- **Killed for contract defect** — the contract was wrong, ambiguous, or missing context, discovered in Implement. This is a Phase 1 quality signal: BugLady's interview missed something or the PM's pressure-test did.
+- **Killed for contract defect** — the contract was wrong, ambiguous, or missing context, discovered in Implement. This is a Phase 1 quality signal: intake missed something or the PM's pressure-test did.
 
 ### How to compute
 ```
@@ -51,21 +51,21 @@ Track both. Only the defect rate has thresholds — priority kills are expected 
 | Band | Range | Meaning |
 |---|---|---|
 | Healthy | <10% | Contracts are trustworthy |
-| Watch | 10–20% | BugLady interviews or PM review need attention |
-| Alert | >20% | Phase 1 is rushed or BugLady output is degrading |
+| Watch | 10–20% | Intake or PM review needs attention |
+| Alert | >20% | Phase 1 is rushed or draft quality is degrading |
 
 ### What it triggers
 
-**Watch:** Bring two defect-killed contracts to the Quality Review. Discuss the pattern — was it a question BugLady should have asked, missing codebase context in Technical Notes, or a PM pressure-test miss?
+**Watch:** Bring two defect-killed contracts to the Quality Review. Discuss the pattern — was it a question intake should have asked, missing codebase context in Technical Notes, or a PM pressure-test miss?
 
 **Alert:** Hold all non-urgent new Requests for one week. Use the time to:
-- Update BugLady's interview prompt with the recurring miss pattern
+- Update the intake prompt with the recurring miss pattern
 - Tighten the Request Contract template if a section needs more rigor
 - Recalibrate the PM's five checks on the specific failure mode
 
 ### Defect causes to track separately
-- Interview didn't surface a key fact (BugLady prompt fix)
-- Technical Notes missed relevant code (BugLady codebase-analysis fix)
+- Intake didn't surface a key fact (prompt fix)
+- Technical Notes missed relevant code (codebase-analysis fix)
 - Acceptance Criteria were incomplete (template fix)
 - Architectural impossibility surfaced in Implement (Dev consultation gap in Align)
 
@@ -249,7 +249,7 @@ Keep it simple. Notion page, GitHub README, plain text — doesn't matter. The n
 
 ## Actions from last week's review
 - Updated `CLAUDE.md` in payments-service with the audit logger rule (closed)
-- Drafted new BugLady prompt for PHI tagging (in progress)
+- Drafted new intake prompt for PHI tagging (in progress)
 
 ## This week's action
 - AI PR first-time CI pass dropped — audit last 10 failures by Friday

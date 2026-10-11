@@ -20,15 +20,15 @@ If you find yourself wanting a fourth role, the question to ask first is: *what 
 
 **Old definition:** Writes specs, prioritizes backlog, manages stakeholders.
 
-**ADRIAN definition:** Owns intent and the request contract. Pressure-tests BugLady output. Owns the customer relationship. Force-multiplier, not bottleneck.
+**ADRIAN definition:** Owns intent and the request contract. Pressure-tests drafted contracts — or drafts them, if the team runs no requirements agent. Owns the customer relationship. Force-multiplier, not bottleneck.
 
 ### Per-phase responsibilities
 
 **Phase 1 — Align**
-- Review every BugLady-drafted Request Contract before approval
+- Review every Request Contract before approval — every one, whether an agent drafted it or you did
 - Run the four checks: wrong-feature, one-way door, UX state coverage, domain flag
-- Approve or reject. Rejection sends back to BugLady or to a follow-up customer chat
-- Approve the Request Contract in BugLady — it is now locked; the PR will link back to it
+- Approve or reject. Rejection sends the contract back for redraft or to a follow-up customer conversation
+- Approve in the requirements system — the contract is now locked; the PR will link back to it
 
 **Phase 2 — Implement**
 - On-call for Dev or agent questions about Intent or Boundaries
@@ -45,15 +45,15 @@ If you find yourself wanting a fourth role, the question to ask first is: *what 
 
 ### What the PM does NOT do
 
-- Type specs by hand (BugLady does the draft)
+- Type specs by hand, where a requirements agent can draft them (review beats transcription)
 - Manage developer assignments (the team self-manages)
 - Review code (Dev does)
 - Run standups (ADRIAN has no standups — the Quality Review is a decision meeting, not status)
-- Translate between customer and engineer in real time (BugLady's chat is the bridge)
+- Translate between customer and engineer in real time (the contract and its origin are the bridge)
 
 ### When the PM should escalate
 
-- BugLady is drafting specs that consistently need >30% revision
+- Drafted contracts consistently need >30% revision
 - Multiple requests touch the same area in conflicting ways
 - A customer asks for something that crosses compliance modes
 
@@ -126,7 +126,7 @@ The role name is two words on purpose. **QA without Success becomes a gatekeeper
 **Phase 3 — Deliver**
 - Manual UX state verification on real devices (loading, empty, error, success for every state in Acceptance)
 - Production verification — confirm Verification metrics moved
-- Close the customer loop — talk to the customer who triggered the BugLady chat
+- Close the customer loop — talk to the customer named in the contract's Origin
 
 **Phase 4 — Adapt**
 - Bring "tests passed but feature was wrong" patterns to Quality Review
