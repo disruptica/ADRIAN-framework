@@ -6,7 +6,9 @@
 
 **An open source framework born at [Disruptica](https://disruptica.com).**
 
-ADRIAN is a software development framework for small, self-managing teams that produce most of their code with AI agents (Claude Code, Cursor, Aider, etc.) and use an in-app requirements bot ([BugLady](https://buglady.ai)) as the requirements spine.
+ADRIAN is a software development framework for small (3 to 10 people), self-managing teams that produce most of their code with AI agents (Claude Code, Cursor, Aider, Ramjet, etc.).
+
+We use an in-app requirements bot ([BugLady](https://buglady.ai)) as the requirements spine, but you can still using Github Projects, Linear, Jira, etc. 
 
 > **Born at:** [Disruptica](https://disruptica.com) — where we run ADRIAN daily on our own products
 > **Author:** Jay (Jairo) Anaya
@@ -31,7 +33,7 @@ ADRIAN is built for squash:
 
 ## Honest framing — read this first
 
-ADRIAN is a framework we built for ourselves first and open-sourced second. It is not (yet) a widely-adopted industry standard. There is no widely-adopted standard for AI-first agentic teams — the field is roughly 18 months old as of mid-2026.
+ADRIAN is a framework we built for ourselves first and open-sourced second. It is not (yet) a widely-adopted industry standard. There is no widely-adopted standard for AI-first agentic teams — the field is roughly 18 months old as of  October 2026.
 
 What ADRIAN **is**:
 
@@ -54,9 +56,11 @@ References this draws from are listed in [`REFERENCES.md`](./REFERENCES.md).
 
 > **The requirements are doing less work than they need to, and review is doing more work than it can sustain.**
 
-When AI produces 85%+ of code, traditional review cannot keep up. The quality gates move **upstream into the Request Contract** and **downstream into automated verification**. Humans spend attention only on intent, judgment, and accountability.
+When AI produces 95%+ of code, traditional review cannot keep up. The quality gates move **upstream into the Request Contract** and **downstream into automated verification**. Humans spend attention only on intent, judgment, and accountability.
 
-### How a Request is born
+### How a Request Methdology is born at Disruptica
+
+We noticed working with Claude Code and Codex was giving extreme velocity on the coding side, but extreme pressure on the quality side. So we had to develop an internal tool to solve that problem: Project Buglady.
 
 1. A user (or the PM, or the business) talks to **BugLady** inside the application — a chat interview, the way a product manager would ask questions
 2. BugLady analyzes the conversation, the codebase, business goals, and compliance posture
@@ -72,12 +76,12 @@ When AI produces 85%+ of code, traditional review cannot keep up. The quality ga
 
 | Phase | Who leads | Output | Time share |
 |---|---|---|---|
-| **Align** | PM + BugLady | An approved Request Contract | 15–30% |
+| **Align** | PM + AI Agent (Buglady) | An approved Request Contract | 15–30% |
 | **Implement** | Dev + AI agents | Working code, tests, docs | 40–50% |
 | **Deliver** | CI/CD + QA | Verified production deploy | 15–25% |
 | **Adapt** | Whole team + agents | Lessons learned → team practice AND agent context (`CLAUDE.md`, BugLady prompts) | 5–10% |
 
-The Adapt phase feeds two learners: the **team** (retros, quality review) and the **agents** (updated rules files, updated BugLady interview prompts). Both compound.
+The Adapt phase feeds two learners: the **team** (the Quality Review — planning, check, and retro in one meeting) and the **agents** (updated rules files, updated BugLady interview prompts). Both compound.
 
 ---
 
