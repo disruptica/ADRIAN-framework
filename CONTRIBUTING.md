@@ -8,7 +8,7 @@ ADRIAN is v0.2 — actively evolving. Contributions are welcome, and the contrib
 
 - **Author / Maintainer:** Jay (Jairo) Anaya
 - **Origin & steward:** [Disruptica](https://disruptica.com) — ADRIAN was born at Disruptica and is the framework used internally on its products
-- **Reference implementation:** [BugLady](https://buglady.ai) — where ADRIAN was proven, not a dependency of it
+- **Reference implementation:** [EverMach](https://evermach.com) — where ADRIAN was proven, not a dependency of it
 
 ---
 
@@ -122,4 +122,4 @@ If you wouldn't say it to a colleague in a code review at a job you wanted to ke
 - **Issues and PRs:** primary channel
 - **Discussions:** for "should we…" questions before opening an issue
 - **Email:** for sponsorship, partnerships, or anything that doesn't belong in public — Jay (Jairo) Anaya, via [Disruptica](https://disruptica.com)
-- **BugLady-specific questions:** [buglady.ai](https://buglady.ai), not this repo
+- **EverMach-specific questions:** [evermach.com](https://evermach.com), not this repo

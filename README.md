@@ -2,17 +2,17 @@
 
 [![CI](https://github.com/disruptica/adrian-framework/actions/workflows/ci.yml/badge.svg)](https://github.com/disruptica/adrian-framework/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](./CITATION.cff)
+[![Version](https://img.shields.io/badge/version-0.2.1-blue.svg)](./CITATION.cff)
 
 **An open source framework born at [Disruptica](https://disruptica.com).**
 
 ADRIAN is a software development framework for small (3 to 10 people), self-managing teams that produce most of their code with AI agents (Claude Code, Cursor, Codex, Aider, etc.).
 
-The framework is **tool-independent**: it needs a requirements system that satisfies six specific things, and it does not care which one. We run it on an in-app requirements agent ([BugLady](https://buglady.ai)), but ADRIAN works just as well on GitHub Projects, Linear, Jira, or a spec-driven toolchain like Spec Kit or Kiro. See [`TOOLING.md`](./TOOLING.md).
+The framework is **tool-independent**: it needs a requirements system that satisfies six specific things, and it does not care which one. We run it on [EverMach](https://evermach.com), which covers both intake and agentic implementation, but ADRIAN works just as well on GitHub Projects, Linear, Jira, or a spec-driven toolchain like Spec Kit or Kiro. See [`TOOLING.md`](./TOOLING.md).
 
 > **Born at:** [Disruptica](https://disruptica.com) — where we run ADRIAN daily on our own products
 > **Author:** Jay (Jairo) Anaya
-> **Reference implementation:** [BugLady](https://buglady.ai) — the in-app PM agent that interviews users and produces ADRIAN's Request Contracts. Disruptica's internal deployment is codenamed **Ramjet** — same tool, dogfooded on our own codebases before anything ships to buglady.ai. It is where ADRIAN was proven, not a dependency of it.
+> **Reference implementation:** [EverMach](https://evermach.com) — gathers requirements through an in-app interview, produces ADRIAN's Request Contracts, and builds against them with agents. Disruptica's internal deployment is codenamed **Ramjet** — same tool, dogfooded on our own codebases before anything ships to evermach.com. It is where ADRIAN was proven, not a dependency of it.
 
 ---
 
@@ -38,7 +38,7 @@ ADRIAN is a framework we built for ourselves first and open-sourced second. It i
 What ADRIAN **is**:
 
 - A synthesis of converging 2025–2026 practices: request-driven contracts, agent context engineering, AI-attributed quality metrics, mutation testing, architectural fitness functions
-- Battle-tested at Disruptica on a team structure of **1 PM + 1 or more Devs + 1 QA/Success**, with BugLady (internally: Ramjet) as the requirements agent — though no document in this set requires it
+- Battle-tested at Disruptica on a team structure of **1 PM + 1 or more Devs + 1 QA/Success**, with EverMach (internally: Ramjet) as the requirements agent — though no document in this set requires it
 - Designed to flex across unregulated and regulated domains via a compliance mode switch
 - Version 0.2 — revised quarterly based on the metrics it produces
 
@@ -60,7 +60,7 @@ When AI produces 95%+ of code, traditional review cannot keep up. The quality ga
 
 ### Where this came from
 
-Working with Claude Code and Codex gave us extreme velocity on the coding side and extreme pressure on the quality side. The pressure landed on requirements: agents will build whatever a vague ticket implies, fast, and at volume. So we did two things — wrote down the methodology that became ADRIAN, and built an in-app requirements agent to fix intake (**BugLady**, internally **Ramjet**). The two grew up together, which is exactly why the methodology is published on its own: a framework that only works on its authors' tool isn't a framework.
+Working with Claude Code and Codex gave us extreme velocity on the coding side and extreme pressure on the quality side. The pressure landed on requirements: agents will build whatever a vague ticket implies, fast, and at volume. So we did two things — wrote down the methodology that became ADRIAN, and built a tool to fix intake and then carry the work through implementation (**EverMach**, internally **Ramjet**). The two grew up together, which is exactly why the methodology is published on its own: a framework that only works on its authors' tool isn't a framework.
 
 ### How a Request is born
 
@@ -110,15 +110,19 @@ Additional repo files:
 
 ---
 
-## About BugLady (and Ramjet)
+## About EverMach (and Ramjet)
 
-[BugLady](https://buglady.ai) is an in-app product manager that lives inside each application you produce or maintain. It captures requirements through a chat interview by analyzing the codebase, business goals, and compliance posture, then generates the Request Contract that drives ADRIAN's Align phase — including the interview itself as context for the dev team and coding agents.
+[EverMach](https://evermach.com) is an in-app product manager that lives inside each application you produce or maintain. It captures requirements through a chat interview by analyzing the codebase, business goals, and compliance posture, generates the Request Contract that drives ADRIAN's Align phase — including the interview itself as context for the dev team — and then builds against that contract with agents through Implement.
 
-At Disruptica, our internal deployment of BugLady is codenamed **Ramjet**. Same tool — we run it against our own products first. Every ADRIAN practice in this repo was exercised with Ramjet before being published.
+*(Formerly **BugLady**. Same tool, renamed; earlier versions of these documents and the v0.1 citation use the old name.)*
 
-**It is the reference implementation, not a requirement.** ADRIAN asks six things of a requirements system; BugLady satisfies them natively because the two were built together, and plenty of tooling you already own satisfies them with a template and a convention. Without any requirements agent, the PM conducts the interview and drafts the contract — Phase 1 costs more human time and the methodology is unchanged. [`TOOLING.md`](./TOOLING.md) has the requirements and maps the common alternatives onto them.
+At Disruptica, our internal deployment of EverMach is codenamed **Ramjet**. Same tool — we run it against our own products first. Every ADRIAN practice in this repo was exercised with Ramjet before being published.
 
-Mentions of BugLady are confined to this README, [`TOOLING.md`](./TOOLING.md), [`CONTRIBUTING.md`](./CONTRIBUTING.md), and [`REFERENCES.md`](./REFERENCES.md). The methodology documents name no tool at all — if you find one that does, that's a bug worth reporting.
+**It is the reference implementation, not a requirement.** ADRIAN asks six things of a requirements system, listed in [`TOOLING.md`](./TOOLING.md); EverMach satisfies all six natively, because the methodology and the tool were built against each other. That's what "100% ADRIAN-compatible" means here — a checkable claim against a published list, not a badge. Plenty of tooling you already own satisfies the same six with a template and a convention, and without any requirements agent the PM conducts the interview and drafts the contract: Phase 1 costs more human time and the methodology is unchanged.
+
+Because EverMach spans intake *and* implementation, one caution applies to running ADRIAN on it — or on any single tool that both writes the contract and builds against it. See [`TOOLING.md`](./TOOLING.md#when-one-tool-spans-intake-and-implementation).
+
+Mentions of EverMach are confined to this README, [`TOOLING.md`](./TOOLING.md), [`CONTRIBUTING.md`](./CONTRIBUTING.md), and [`REFERENCES.md`](./REFERENCES.md). The methodology documents name no tool at all — if you find one that does, that's a bug worth reporting.
 
 ---
 
