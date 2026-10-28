@@ -12,8 +12,8 @@ abstract: >
   rather than which one to use. Flexes across unregulated and regulated domains
   via a compliance mode overlay.
 type: software
-version: "0.2.0"
-date-released: 2026-10-11
+version: "0.2.1"
+date-released: 2026-10-27
 license: MIT
 repository-code: "https://github.com/disruptica/adrian-framework"
 url: "https://github.com/disruptica/adrian-framework"
@@ -34,8 +34,8 @@ keywords:
   - tool-agnostic
 identifiers:
   - type: url
-    value: "https://buglady.ai"
-    description: "Reference implementation — BugLady (in-app requirements agent; Disruptica's internal deployment is codenamed Ramjet)"
+    value: "https://evermach.com"
+    description: "Reference implementation — EverMach, formerly BugLady (in-app requirements agent and agentic builder; Disruptica's internal deployment is codenamed Ramjet)"
   - type: url
     value: "https://disruptica.com"
     description: "Origin organization — Disruptica"
